@@ -1,0 +1,12 @@
+Package: Rsnippets
+Title: Useful pieces of code for Kassel Hingee
+Version: 0.0.0.1
+Authors@R: 
+    person("Kassel", "Hingee")
+Description: What the package does (one paragraph).
+RdMacros: Rdpack
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+
