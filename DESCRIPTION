@@ -1,8 +1,7 @@
 Package: Rsnippets
 Title: Useful pieces of code for Kassel Hingee
 Version: 0.0.0.1
-Authors@R: 
-    person("Kassel", "Hingee")
+Authors: "Kassel Hingee")
 Description: What the package does (one paragraph).
 RdMacros: Rdpack
 License: GPL (>= 3)
