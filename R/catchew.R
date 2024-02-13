@@ -9,7 +9,7 @@ catchew <- function(expr){
   messages <- vector(mode = "character")
   catchmessage <- function(e){
     assign("messages",
-           c(messages, paste0(paste0(class(e), collapse=""), ": ", e$message)),
+           c(messages, paste0(paste0(class(e)[[1]], collapse=""), ": ", e$message)),
            envir = parent.env(as.environment(-1)))
   }
   stderr <- utils::capture.output({res <- tryCatch(
@@ -24,7 +24,11 @@ catchew <- function(expr){
                                }),
                   error = catchmessage)},
     type = "message")
-  return(list(res = res, messages = c(messages, paste("stderr:", stderr)))) 
+  if (length(stderr) > 0){
+    messages <- c(messages, paste("stderr:", stderr))
+  }
+
+  return(list(res = res, messages = messages)) 
 }
 
 
