@@ -1,5 +1,5 @@
-#' @title Catch errors and warnings, and put into a text object
-#' @description Another package redefines a function, which might be the best way to do it. I find this way simpler at the moment.
+#' @title Catch errors, warnings, stderr and put all into a text object
+#' @description Another package redefines a function, which might be the best way to do it. I find this way simpler at the moment. I find this function useful for simulation studies.
 #' @details Much of information about capturing the warnings I got from [http://adv-r.had.co.nz/beyond-exception-handling.html]
 #' @examples
 #' catchew({warning("a test warning"); "hello"})
@@ -9,16 +9,22 @@ catchew <- function(expr){
   messages <- vector(mode = "character")
   catchmessage <- function(e){
     assign("messages",
-           c(messages, e$message),
+           c(messages, paste0(paste0(class(e), collapse=""), ": ", e$message)),
            envir = parent.env(as.environment(-1)))
   }
-  res <- tryCatch(
+  stderr <- utils::capture.output({res <- tryCatch(
            withCallingHandlers(expr,
                                warning =  function(w) {
                                  if (inherits(w, "warning")){ 
                                    catchmessage(w)
                                    tryInvokeRestart("muffleWarning")
-                               } }),
-                  error = catchmessage)
-  return(list(res = res, messages = messages)) 
+                               }},
+                               message =  function(w) {
+                                 catchmessage(w)
+                               }),
+                  error = catchmessage)},
+    type = "message")
+  return(list(res = res, messages = c(messages, paste("stderr:", stderr)))) 
 }
+
+
