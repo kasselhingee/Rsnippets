@@ -6,6 +6,8 @@
 #' The return matrix \eqn{Q} is a rotation such that \eqn{Qa=b}, and for any vector \eqn{z} perpendicular to both `b` and `a`, \eqn{Qz=z}.
 #' In the extremely rare situation that `b` = -`a`, the \insertCite{amaral2007pi;textual}{scorecompdir} method does not apply. Instead `rotationmatrix()`, rotates `a` to the south pole, applies a rotation of `pi` that passes through the second basis vector and then reverses the first rotation.
 #' The same method, without the case of `b = -a`, is also implemented in `rotation()` function of the [`Directional`](https://cran.r-project.org/package=Directional) package.
+#'
+#' If the angle between the two vectors is smaller than `sqrt(.Machine$double.eps)` then the identity matrix is returned.
 #' @references \insertAllCited{}
 #' @examples
 #' a <- c(1,2,3,4,5)
@@ -28,6 +30,8 @@ rotationmatrix <- function(a, b){
     a2sthpole <- rotationmat_amaral(sthpole, a)
     sth2nth <- diag(c(-1, -1, rep(1, d-2)))
     Q <- t(a2sthpole)%*%sth2nth%*%a2sthpole
+  } else if (acos((a %*% b)[[1]]) < sqrt(.Machine$double.eps)) { #two vectors too close to parallel
+    Q <- diag(length(a))
   } else {
     Q <- rotationmat_amaral(b, a)
   }
