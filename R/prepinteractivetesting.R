@@ -3,10 +3,10 @@
 #' @details Uses `attach()`. Perhaps I could use something like `devtools::load_all(compile = TRUE)`
 #' @param path Directory of package. If this fails to get a package name, the it will try using path as the package name.
 #' @export
-prepinteractivetesting <- function(path, ..., install = TRUE, build = TRUE){
-  if (install){devtools::install(path, build = build)
+prepinteractivetesting <- function(path = ".", ..., install = TRUE, build = TRUE){
+  if (install){devtools::install(path, build = build)}
   name <- tryCatch(pkgload::pkg_name(path = path),
                    error = function(e){path})
   attach(loadNamespace(name), name = name)
-  library(testthat)
+  attach(loadNamespace("testthat"), name = "testthat")
 }
