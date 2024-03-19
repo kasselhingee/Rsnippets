@@ -11,9 +11,9 @@ prepinteractivetesting(path = ".", ..., install = TRUE, build = TRUE)
 }
 \description{
 This installs a local package using \code{devtools::install()} then attaches the namespace of the package and \code{testthat}.
-I'm not sure why this led to different behaviour than \code{devtools::test()} and \code{devtools::load_all()}.
-I think \code{devtools::test()} may compile C++ without the \code{NDEBUG} flag so that any assertions in the C++ code get thrown and cause R to abort.
+I'm not sure why this led to different behaviour than \code{devtools::test()}, but I think \code{devtools::test()} may compile C++ without the \code{NDEBUG} flag so that any assertions in the C++ code get thrown and cause R to abort.
 }
 \details{
-Uses \code{attach()}. Perhaps I could use something like \code{devtools::load_all(compile = TRUE)}
+Uses \code{attach()}. Perhaps I could use something like \code{devtools::load_all(compile = TRUE)}.
+I suspect a difficulty with repeatability is that the C++ shared library for the package (a \code{.so} file) is automatically only regenerated if the source files change. So the issue is that behaviour of the C++ asserts depends on whether the most recent compiling was by \code{devtools::test()} or something else.
 }

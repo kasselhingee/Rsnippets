@@ -5,7 +5,7 @@
 #' @export
 installinfo <- function(name){
 info <- utils::packageDescription(name)
-pkgimportant <- paste(scorecompdirinfo[c("Suggests", "Imports", "Depends")], collapse = ", ")
+pkgimportant <- paste(info[c("Suggests", "Imports", "Depends")], collapse = ", ")
 pkgimportant <- unlist(strsplit(gsub("[^,ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz]", "", pkgimportant), ","))
 pkgimportant <- c(pkgimportant, name)
 pkginfo <- as.data.frame(utils::installed.packages(fields = c("Built", "Packaged")))

@@ -1,10 +1,10 @@
 #' @title Rotation Matrix From Two Vectors
-#' @description Creates a rotation matrix that rotates between two vectors. The matrix was specified by \insertCite{@@Section 3.2.1, @amaral2007pi;textual}{scorecompdir}, and is such that any vector perpendicular to the two vectors is unchanged (except when the two vectors are in exactly opposite directions).
+#' @description Creates a rotation matrix that rotates between two vectors. The matrix was specified by \insertCite{@@Section 3.2.1, @amaral2007pi;textual}{Rsnippets}, and is such that any vector perpendicular to the two vectors is unchanged (except when the two vectors are in exactly opposite directions).
 #' @param a The vector to rotate.
 #' @param b The final vector.
 #' @details
 #' The return matrix \eqn{Q} is a rotation such that \eqn{Qa=b}, and for any vector \eqn{z} perpendicular to both `b` and `a`, \eqn{Qz=z}.
-#' In the extremely rare situation that `b` = -`a`, the \insertCite{amaral2007pi;textual}{scorecompdir} method does not apply. Instead `rotationmatrix()`, rotates `a` to the south pole, applies a rotation of `pi` that passes through the second basis vector and then reverses the first rotation.
+#' In the extremely rare situation that `b` = -`a`, the \insertCite{amaral2007pi;textual}{Rsnippets} method does not apply. Instead `rotationmatrix()`, rotates `a` to the south pole, applies a rotation of `pi` that passes through the second basis vector and then reverses the first rotation.
 #' The same method, without the case of `b = -a`, is also implemented in `rotation()` function of the [`Directional`](https://cran.r-project.org/package=Directional) package.
 #'
 #' If the angle between the two vectors is smaller than `sqrt(.Machine$double.eps)` then the identity matrix is returned.
