@@ -3,5 +3,7 @@
 export(catchew)
 export(installinfo)
 export(prepinteractivetesting)
+export(pt)
+export(pti)
 export(rotationmatrix)
 export(seeds)

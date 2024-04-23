@@ -13,3 +13,8 @@ prepinteractivetesting <- function(path = ".", ..., install = TRUE, build = TRUE
   attach(loadNamespace(name), name = name)
   attach(loadNamespace("testthat"), name = "testthat")
 }
+
+#' @export
+pt <- function(){prepinteractivetesting(install = FALSE)}
+#' @export
+pti <- function(){prepinteractivetesting(install = TRUE)}
